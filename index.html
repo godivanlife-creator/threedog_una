@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Una｜GodiVanLife</title>
+
+<style>
+:root {
+    --main: #4ecdc4;
+    --accent: #1a535c;
+    --bg1: #e0fbfc;
+    --bg2: #c2f0f7;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: 'PingFang TC','Microsoft JhengHei',sans-serif;
+    background: linear-gradient(-45deg,var(--bg1),var(--bg2),#f1fdfd,var(--bg1));
+    background-size: 400% 400%;
+    animation: waterMove 10s ease infinite;
+    text-align: center;
+}
+
+@keyframes waterMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    max-width: 420px;
+    margin: auto;
+    background: white;
+    padding: 28px;
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+}
+
+.profile-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 6px solid var(--main);
+    object-fit: cover;
+    margin-bottom: 18px;
+    transition: 0.3s ease;
+}
+
+.profile-img:hover {
+    transform: scale(1.05);
+}
+
+h1 {
+    margin: 10px 0;
+    font-size: 26px;
+    color: var(--accent);
+}
+
+.tagline {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.info-card {
+    background: #f4fdff;
+    padding: 18px;
+    border-radius: 18px;
+    margin-bottom: 15px;
+    text-align: left;
+    line-height: 1.6;
+}
+
+.warning {
+    background: #fff3f3;
+    padding: 14px;
+    border-radius: 14px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #b02a37;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    border-radius: 25px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    transition: 0.3s ease;
+}
+
+.btn-call {
+    background: var(--main);
+}
+
+.btn-call:hover {
+    background: var(--accent);
+}
+
+.btn-sms {
+    background: #28a745;
+}
+
+.btn-sms:hover {
+    background: #1e7e34;
+}
+
+.instagram-link {
+    display: block;
+    margin-top: 15px;
+    padding: 12px;
+    background: linear-gradient(45deg,#f09433,#dc2743,#bc1888);
+    color: white;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer {
+    margin-top: 25px;
+    font-size: 11px;
+    color: #999;
+    letter-spacing: 2px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="images/una.jpg" alt="Una" class="profile-img">
+
+<h1>Una</h1>
+<p class="tagline">GodiVanLife 守護系統</p>
+
+<div class="info-card">
+    🫶 個性超好，很友善，親人親狗<br><br>
+    🐶 喜歡凹嗚叫邀請狗朋友一起玩<br><br>
+    🏊‍♀️ 超會游泳，看到水就很開心
+</div>
+
+<div class="warning">
+    ⚠️ 很怕鞭炮與巨大聲響，會緊張找人
+</div>
+
+<button class="btn btn-sms" onclick="sendSMSLocation()">
+📍 即時定位通報
+</button>
+
+<a href="tel:0920121273" class="btn btn-call">
+📞 撥打主人
+</a>
+
+<a href="https://www.instagram.com/sweet_three_doggies" target="_blank" class="instagram-link">
+看我們的 IG 📸
+</a>
+
+<footer>
+POWERED BY GODIVANLIFE
+</footer>
+
+</div>
+
+<script>
+function sendSMSLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            const mapUrl = "https://www.google.com/maps?q=" + lat + "," + lng;
+            const message = encodeURIComponent("【尋寵通報】我發現 Una！目前位置：" + mapUrl);
+            window.location.href = "sms:0920121273?body=" + message;
+        });
+    } else {
+        window.location.href = "sms:0920121273?body=" + 
+        encodeURIComponent("【尋寵通報】我發現 Una，請與我聯繫。");
+    }
+}
+</script>
+
+</body>
+</html>
